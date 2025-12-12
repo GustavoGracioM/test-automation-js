@@ -9,7 +9,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "^10.0.0",
     "chai": "^5.1.0",
-    "chromedriver": "^143.0.0",
+    "chromedriver": "^143.0.1",
     "cucumber-html-reporter": "^5.5.1",
     "cucumber-junit": "^1.7.1",
     "selenium-webdriver": "^4.39.0",

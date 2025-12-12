@@ -13,6 +13,7 @@ class LoginPage extends BasePage {
 
   async open() {
     await this.driver.get("http://homolog-v2-4-ncommand-lite.ionic.health/");
+    await this.driver.sleep(2000);
   }
 
   async fillEmailAndPassword(email, password) {

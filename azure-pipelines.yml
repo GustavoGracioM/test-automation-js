@@ -8,24 +8,43 @@ variables:
   NODE_VERSION: '20.x'
 
 steps:
+  # 1️⃣ Instala Node
   - task: NodeTool@0
     inputs:
       versionSpec: '$(NODE_VERSION)'
 
+  # 2️⃣ Instala dependências do Linux
+  - script: |
+      sudo apt-get update
+      sudo apt-get install -y ffmpeg xvfb
+    displayName: 'Install FFmpeg + Xvfb'
+
+  # 3️⃣ Instala dependências Node
   - script: npm ci
     displayName: 'Install dependencies'
 
+  # 4️⃣ Executa testes com display virtual
   - script: |
+      export DISPLAY=:99
+      Xvfb :99 -screen 0 1920x1080x24 &
       npm run test:report
-    displayName: 'Run Cucumber tests and generate reports'
+    displayName: 'Run Cucumber tests with video'
     env:
       CI: true
 
+  # 5️⃣ Publica resultados JUnit
   - task: PublishTestResults@2
     inputs:
       testResultsFiles: 'reports/junit-report.xml'
       testRunTitle: 'Cucumber Tests'
       failTaskOnFailedTests: true
+
+  # 6️⃣ Publica artefatos: vídeos, screenshots e reports
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'evidences'
+      ArtifactName: 'evidences'
+      publishLocation: 'Container'
 
   - task: PublishBuildArtifacts@1
     inputs:

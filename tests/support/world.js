@@ -1,3 +1,4 @@
+require("./evidence-hooks");
 const { setWorldConstructor, setDefaultTimeout, Before, After } = require("@cucumber/cucumber");
 const { getDriver, quitDriver } = require("./driver");
 const LoginPage = require("../pages/LoginPage");
@@ -16,7 +17,7 @@ class CustomWorld {
   }
 
   async cleanup() {
-    await quitDriver();
+    await quitDriver(this.driver);
   }
 }
 

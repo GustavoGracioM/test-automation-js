@@ -1,3 +1,6 @@
-2025/12/12-08:57:17.205 86a8 Reusing MANIFEST C:\Users\Gustavo\Downloads\test-automation-js\chrome-profile\Default\Session Storage/MANIFEST-000001
-2025/12/12-08:57:17.206 86a8 Recovering log #6
-2025/12/12-08:57:17.208 86a8 Reusing old log C:\Users\Gustavo\Downloads\test-automation-js\chrome-profile\Default\Session Storage/000006.log 
+2025/12/12-10:55:01.626 1ce0 Reusing MANIFEST C:\Users\Gustavo\Downloads\test-automation-js\chrome-profile\Default\Session Storage/MANIFEST-000001
+2025/12/12-10:55:01.627 1ce0 Recovering log #3
+2025/12/12-10:55:01.631 1ce0 Reusing old log C:\Users\Gustavo\Downloads\test-automation-js\chrome-profile\Default\Session Storage/000003.log 
+2025/12/12-10:56:07.159 89e4 Level-0 table #5: started
+2025/12/12-10:56:07.166 89e4 Level-0 table #5: 16741 bytes OK
+2025/12/12-10:56:07.170 89e4 Delete type=0 #3

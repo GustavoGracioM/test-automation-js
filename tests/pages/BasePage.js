@@ -5,7 +5,7 @@ class BasePage {
     this.driver = driver;
   }
 
-  async find(locator, timeout = 10000) {
+  async find(locator, timeout = 20000) {
     await this.driver.wait(
       until.elementLocated(locator),
       timeout,

@@ -1,9 +1,10 @@
-const { Before, After } = require("@cucumber/cucumber");
+const { Before, AfterAll } = require("@cucumber/cucumber");
+const { quitDriver } = require("./driver");
 
 Before(async function () {
   await this.init();
 });
 
-After(async function () {
-  await this.cleanup();
+AfterAll(async function () {
+  await quitDriver();
 });
