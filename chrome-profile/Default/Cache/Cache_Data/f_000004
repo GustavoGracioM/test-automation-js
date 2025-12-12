@@ -1,0 +1,1684 @@
+
+<!DOCTYPE html>
+<html translate="no">
+<head>
+
+    <title>nCommand Login</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
+    <link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ionicadb2c.blob.core.windows.net/adb2c/v2.4.0/app.js" defer></script>
+    <style id="common">
+        @font-face {
+            font-family: 'SegoeUI';
+            src: url(https://ionichealthb2c.b2clogin.com/static/tenant/templates/fonts/segoeui.WOFF);
+            font-weight: normal;
+        }
+        @font-face {
+            font-family: 'SegoeUI';
+            src: url(https://ionichealthb2c.b2clogin.com/static/tenant/templates/fonts/segoeui_bold.WOFF);
+            font-weight: bold;
+        }
+        #AmazonExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/amazon.svg);
+        }
+        #AmazonExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/amazon.svg);
+        }
+        #FacebookExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/facebook.svg);
+        }
+        #FacebookExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/facebook.svg);
+        }
+        #GitHubExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/github.svg);
+        }
+        #GitHubExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/github.svg);
+        }
+        #AppleExchange,#AppleManagedExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/apple.svg);
+        }
+        #AppleExchange:hover,#AppleManagedExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/apple.svg);
+        }
+        #GoogleExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/google.svg);
+        }
+        #GoogleExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/google.svg);
+        }
+        #LinkedInExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/linkedin.svg);
+        }
+        #LinkedInExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/linkedin.svg);
+        }
+        #MicrosoftAccountExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/microsoft.svg);
+        }
+        #MicrosoftAccountExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/microsoft.svg);
+        }
+        #QQExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/qq.svg);
+        }
+        #QQExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/qq.svg);
+        }
+        #TwitterExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/twitter.svg);
+        }
+        #TwitterExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/twitter.svg);
+        }
+        #WeChatExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/wechat.svg);
+        }
+        #WeChatExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/wechat.svg);
+        }
+        #WeiboExchange {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/weibo.svg);
+        }
+        #WeiboExchange:hover {
+          background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/weibo.svg);
+        }
+        .buttons #cancel:before {
+            content: url(https://ionicadb2c.blob.core.windows.net/adb2c/left-arrow.svg);
+        }
+    </style>
+    <style id="idpselector">
+        #SignInWithLogonNameExchange, #SignUpWithLogonEmailExchange, #SignUpWithLogonNameExchange {
+            background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/local.svg);
+        }
+        #SignInWithLogonNameExchange:hover, #SignUpWithLogonEmailExchange:hover, #SignUpWithLogonNameExchange:hover {
+            background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/local.svg);
+        }
+        #SignUpWithLogonEmailExchange.text-link {
+            background-image: none;
+            background-color: transparent !important;
+        }
+        #SignUpWithLogonEmailExchange.text-link:hover {
+            background-image: none;
+            background-color: transparent !important;
+        }
+    </style>
+
+<!-- common.css -->
+<style>
+    html{
+  background:0 0
+  }
+  body{
+  font-family:Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-attachment:fixed;
+  background-color:#121212;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  text-align:left
+  }
+  .container{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 8em 0px 3em 0px;
+  }
+  @media (min-width: 1921px) {
+    .container{
+      padding: 16em 0px 3em 0px;
+    }
+  }
+  a:focus{
+  outline:0
+  }
+  select{
+  border:none;
+  border-bottom:1px solid #ccc
+  }
+  select:focus{
+  text-shadow:0 0 0 #000;
+  outline:0;
+  border:none;
+  border-bottom:1px solid #1662c7
+  }
+  select:-moz-focusring{
+  color:transparent
+  }
+  img[data-tenant-branding-background=true]{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  position:fixed;
+  left:0;
+  overflow:hidden;
+  top:0
+  }
+  div[data-tenant-branding-background-color=true]{
+  width:100%;
+  height:100%;
+  position:fixed;
+  z-index:0
+  }
+  #api{
+  margin:0 auto
+  }
+  .heading h1{
+  color:#fff;
+  font-size: 16px;
+  opacity: .8;
+  text-align: center;
+  }
+  .col-lg-6{
+  max-width:470px;
+  width:100%;
+  float:none;
+  display:inline-block;
+  vertical-align:top;
+  padding:0
+  }
+  .row{
+  width:100%;
+  margin:0;
+  display:table-cell;
+  vertical-align:middle
+  }
+  ul{
+  padding:0
+  }
+  #simplemodal-container .simplemodal-data{
+  padding:5px 8px;
+  overflow:hidden;
+  background-color:#fff;
+  border-radius:3px;
+  font-style:italic
+  }
+  #LocalAccountSigninEmailExchange,#SignInWithLogonNameExchange{
+  background-image:url(none);
+  background-size:10%;
+  background-position-x:95%;
+  background-position-y:50%;
+  background-repeat:no-repeat;
+  border-radius:4px;
+  width:100%;
+  width:100%;
+  font-size:1em;
+  margin-left:auto
+  }
+  #LocalAccountSigninEmailExchange:hover,#LocalAccountSigninUsernameExchange:hover,#SignInWithLogonEmailExchange:hover,#SignInWithLogonNameExchange:hover,#SignUpWithLogonEmailExchange:hover,#SignUpWithLogonNameExchange:hover{
+  background-color:#1662c7!important
+  }
+  #AmazonExchange:hover{
+  background-color:#36474f!important
+  }
+  #FacebookExchange:hover{
+  background-color:#3b5595!important
+  }
+  #GitHubExchange:hover{
+  background-color:#0f0f0f!important
+  }
+  #AppleExchange:hover,#AppleManagedExchange:hover{
+  background-color:#0f0f0f!important
+  }
+  #GoogleExchange:hover{
+  background-color:#c64a29!important
+  }
+  #LinkedInExchange:hover{
+  background-color:#0274b3!important
+  }
+  #MicrosoftAccountExchange:hover{
+  background-color:#01a4ef!important
+  }
+  #QQExchange:hover{
+  background-color:#1a97df!important
+  }
+  #TwitterExchange:hover{
+  background-color:#1da1f2!important
+  }
+  #WeChatExchange:hover{
+  background-color:#4cc522!important
+  }
+  #WeiboExchange:hover{
+  background-color:#e81123!important
+  }
+  .buttons{
+  text-align:right
+  }
+  .buttons button{
+  display:block;
+  width:50%;
+  height:40px;
+  background-color:#0067b8;
+  border-radius: 4px;
+  color:#fff;
+  font-size:1em;
+  border:none;
+  margin-left:auto;
+  margin-top:10px
+  }
+  .buttons button:hover{
+  background-color:#0058ad;
+  border-color:#204d74
+  }
+  .buttons #continue:disabled,.buttons button[aria-disabled=true]{
+  opacity:.3
+  }
+  .buttons button:not([aria-disabled=true]){
+  opacity:1
+  }
+  .buttons #cancel{
+  padding:0;
+  margin-left:auto;
+  background:0 0;
+  border:0;
+  width:inherit;
+  position:absolute;
+  background-color:transparent;
+  top:2px;
+  left:3.5%;
+  font-size:1em;
+  color:#505050;
+  box-shadow:none;
+  text-align:left
+  }
+  .buttons #cancel:hover{
+  color:#000!important
+  }
+  .buttons #cancel:before{
+  padding:10px;
+  vertical-align:sub;
+  zoom:90%;
+  display:inline-block
+  }
+  #attributeList ul{
+  padding:0
+  }
+  #attributeList ul li{
+  list-style:none;
+  margin:1rem 0
+  }
+  label{
+  font-weight:600
+  }
+  #attributeList ul li label{
+  float:left
+  }
+  #attributeList ul li.EmailBox label,#attributeList ul li.Password label,#attributeList ul li.TextBox label{
+  display:none!important
+  }
+  #attributeList ul li label[for=country]{
+  float:left;
+  display:inline-block!important
+  }
+  #attributeList ul li label[for=cpiminternal_legalCountry]{
+  float:none;
+  text-align:left;
+  display:block!important
+  }
+  #attributeList ul li label[for=cpiminternal_dateOfBirth]{
+  float:none;
+  text-align:left;
+  display:block!important
+  }
+  #attributeList ul li input{
+  outline:0;
+  height:30px;
+  width:70%;
+  border-radius:unset;
+  border:none;
+  border-bottom:1px solid #ccc;
+  box-shadow:none
+  }
+  #attributeList ul li input:focus{
+  border:none;
+  border-bottom:1px solid #1662c7
+  }
+  #attributeList ul li input::-webkit-input-placeholder{
+  text-indent:20px
+  }
+  #attributeList ul li .attrEntry.validate input:invalid{
+  border-color:#b00
+  }
+  #attributeList ul li .attrEntry .verify{
+  margin-top:15px;
+  padding-bottom:10px;
+  position:relative;
+  text-align:right
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_but_send{
+  width:50%;
+  height:40px;
+  background-color:#0067b8;
+  color:#fff;
+  float:right
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_but_send:hover{
+  background-color:#0058ad
+  }
+  @media screen and (-ms-high-contrast:active){
+  #attributeList ul li .attrEntry .verify button,.buttons #continue{
+      border:1px dashed #fff!important
+  }
+  #attributeList ul li .attrEntry .verify button:hover,.buttons #continue:hover{
+      border:1px solid #fff!important
+  }
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_but_verify{
+  width:inherit;
+  padding:0 20px;
+  height:40px;
+  background-color:#0067b8;
+  color:#fff;
+  margin-left:148px
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_but_verify:hover{
+  background-color:#0058ad
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_but_resend{
+  padding:0 20px;
+  border:0;
+  font-size:1em;
+  height:40px;
+  right:0;
+  bottom:-38px;
+  background-color:#0067b8;
+  color:#fff;
+  width:inherit;
+  float:right;
+  margin-left:5px
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_but_resend:hover{
+  background-color:#0058ad
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_but_edit{
+  margin-bottom:15px;
+  border:none;
+  color:#fff;
+  background-color:#0067b8;
+  width:50%;
+  height:40px;
+  float:right
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_but_edit:hover{
+  background-color:#0058ad
+  }
+  #attributeList ul li .attrEntry .verify #email_ver_input_label{
+  display:none!important
+  }
+  #api .working{
+  background:url(data:image/gif;base64,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) no-repeat;
+  height:30px;
+  width:auto;
+  background-position:center bottom
+  }
+  #attributeList ul li .attrEntry .itemLevel{
+  display:none
+  }
+  #attributeList ul li .attrEntry .dropdown_single{
+  height:45px;
+  width:100%;
+  margin-bottom:15px;
+  padding-left:15px
+  }
+  #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth.date{
+  margin-bottom:15px;
+  display:table;
+  width:100%
+  }
+  #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth.date select{
+  display:table-cell;
+  height:45px;
+  padding-left:15px
+  }
+  #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth select#cpiminternal_dateOfBirth_day.day{
+  margin-right:3%;
+  width:23%
+  }
+  #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth select#cpiminternal_dateOfBirth_month.month{
+  margin-right:3%;
+  width:38%
+  }
+  #attributeList ul li .attrEntry div#cpiminternal_dateOfBirth select#cpiminternal_dateOfBirth_year.year{
+  width:33%
+  }
+  #attributeList ul li .helpLink{
+  display:none
+  }
+  @media screen and (max-width:100%){
+  .panel-default .panel-body{
+      margin-top:40px
+  }
+  .panel-default .panel-body .branding img{
+      display:block;
+      height:80px;
+      width:auto;
+      margin:0 auto
+  }
+  .panel-default .panel-body .branding h1{
+      display:none
+  }
+  .panel-default .panel-body h3{
+      font-size:1.5em;
+      margin-top:15px
+  }
+  #attributeVerification #attributeList ul li input{
+      width:60%;
+      height:40px;
+      margin-bottom:10px;
+      border-radius:4px;
+      border:none;
+      text-indent:10px
+  }
+  #attributeVerification #attributeList ul li input::-webkit-input-placeholder{
+      text-indent:10px
+  }
+  #attributeVerification #attributeList ul li #email{
+      width:65%;
+      float:left;
+      position:relative;
+      z-index:2
+  }
+  #attributeVerification #attributeList ul li #email_ver_but_verify{
+      background:0 0;
+      border:0;
+      color:#0067b8;
+      font-size:1em;
+      position:relative;
+      right:0;
+      top:60px;
+      font-size:1.1em;
+      width:auto;
+      z-index:1;
+      height:20px
+  }
+  #attributeVerification #attributeList ul li #email_ver_input{
+      min-width:50%;
+      width:60%;
+      float:left
+  }
+  #attributeVerification #attributeList ul li #email_ver_but_resend{
+      top:10px;
+      font-size:1.1em;
+      height:20px
+  }
+  #attributeVerification #attributeList ul li .attrEntry #email{
+      height:40px
+  }
+  #attributeVerification #attributeList ul li .attrEntry .verify #email_ver_but_send:after{
+      content:" Verify";
+      font-size:1.1em;
+      font-style:bold;
+      margin-left:40%
+  }
+  #attributeVerification #attributeList ul li .attrEntry .verify #email_ver_but_send{
+      height:40px;
+      width:auto;
+      float:right;
+      overflow:hidden;
+      text-indent:-200px
+  }
+  #attributeVerification #attributeList ul li .attrEntry .verify #email_ver_but_edit{
+      margin-bottom:15px;
+      border:none;
+      color:#fff;
+      background-color:#0067b8;
+      border-radius:4px;
+      font-size:1em;
+      width:30%;
+      height:40px;
+      overflow:hidden;
+      padding-top:6px;
+      margin-left:40%
+  }
+  #attributeVerification #attributeList ul li .attrEntry .verify:after{
+      content:" ";
+      display:block;
+      clear:both
+  }
+  #attributeVerification #attributeList #verifying_blurb{
+      margin-top:15px
+  }
+  #attributeVerification .buttons #continue{
+      height:40px
+  }
+  #attributeVerification .buttons #cancel{
+      font-size:1em;
+      left:40%
+  }
+  }
+  .panel,.panel_layout,.panel_layout_row,body,html{
+  height:100%
+  }
+  @media only screen and (max-width:600px){
+  img[data-tenant-branding-background=true]{
+      display:none
+  }
+  .container .panel-default{
+      border-radius:0;
+      border:none;
+      box-shadow:none
+  }
+  }
+
+</style>
+
+<!-- unified.css -->
+<style>
+    .unified_container .panel-default{
+    height:auto;
+    background-color: #202224;
+    max-width: 900px;
+    padding: 24px;
+    border-color: #121212;
+  }
+  .unified_container .panel-default .panel-body{
+      width:100%;
+      margin:0 auto;
+      padding:0
+  }
+  .unified_container .panel-default .panel-body .companyName{
+      font-size:1.5em;
+      margin-bottom:45px
+  }
+  .unified_container .panel-default .panel-body .companyLogo{
+      display:block;
+      height: 50px;
+      margin: 12px auto 24px auto;
+  }
+  .unified_container .panel-default .panel-body img{
+      max-width:60%;
+      width:auto;
+      height:70px;
+      margin:0 auto;
+      display:block;
+  }
+  .unified_container .panel-default .panel-body h3{
+      font-size:1.5em;
+      display:none
+  }
+
+  .unified_container .panel-default #api{
+      display:flex;
+      margin: 1.5em 0 0 0;
+      width:100%;
+      gap: 16px;
+      flex-direction: column-reverse;
+      align-items: stretch;
+  }
+
+  @media (min-width: 768px) {
+      .unified_container .panel-default #api{
+          flex-direction: row-reverse;
+      }
+  }
+
+  .unified_container .panel-default #api .heading{
+      order: 3;
+      opacity: .8;
+      display: none;
+  }
+  .unified_container .panel-default #api .intro{
+      display:block;
+      text-align:left
+  }
+  .unified_container .panel-default #api .intro h2{
+      font-size: 16px;
+      color: white;
+      opacity: .8;
+      text-align: center;
+      margin-bottom: .8em;
+  }
+  .unified_container .panel-default #api .divider {
+      order: 2;
+      display: flex;
+      justify-content: center;
+      opacity: .6;
+  }
+  @media (min-width: 768px) {
+    .unified_container .panel-default #api .divider {
+        order: 2;
+        display: flex;
+        align-items: center;
+        opacity: .6;
+    }
+  }
+  .unified_container .panel-default #api .divider h2 {
+      font-size: 16px;
+      overflow: hidden;
+      text-align: center;
+      color: #ffffff;
+      opacity: .6;
+  }
+
+  .unified_container .panel-default #api .localAccount{
+      position:relative;
+      width:100%;
+      order: 4;
+      flex: 1;
+      background-color: #26292B;
+      border-radius: 4px;
+      padding: 24px;
+      border: 1px solid rgba(111, 111, 111, .2);
+  }
+  .unified_container .panel-default #api .localAccount .intro h2{
+      font-size:16px;
+      color: white;
+  }
+  .unified_container .panel-default #api .localAccount .error{
+      color:#F44336;
+      text-align:left;
+      margin-bottom: 4px;
+  }
+  .unified_container .panel-default #api .localAccount .entry .buttons{
+      margin:15px 0 0 0;
+  }
+  .unified_container .panel-default #api .localAccount .entry .buttons button{
+      float:right;
+      background-image:none;
+      background-color:#54c5ce;
+      border:none;
+      border-radius:4px;
+      cursor:pointer;
+      display:inline-block;
+      font-size:1em;
+      font-weight:400;
+      height:inherit;
+      line-height:1.3333333;
+      margin-top:1rem;
+      margin-right:0;
+      margin-left:0;
+      padding:10px 16px;
+      text-align:center;
+      touch-action:manipulation;
+      user-select:none;
+      vertical-align:middle;
+      white-space:nowrap;
+      width:inherit;
+      -moz-user-select:none;
+      -ms-touch-action:manipulation;
+      -ms-user-select:none;
+      -webkit-user-select:none;
+      color:#051F20;
+      width:100%;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      transition: all ease-in-out 200ms;
+  }
+  .forgot-password{
+      text-align:left
+  }
+  .forgot-password.center-height{
+      position:absolute;
+      right:0;
+      bottom:0;
+      clear:right;
+      cursor:pointer;
+      text-align:right
+  }
+  @media screen and (-ms-high-contrast:active){
+      .unified_container .panel-default #api .accountButton,.unified_container .panel-default #api .localAccount .entry .buttons button{
+          border:1px dashed #fff
+      }
+      .unified_container .panel-default #api .accountButton:hover,.unified_container .panel-default #api .localAccount .entry .buttons button:hover{
+          border:1px solid #fff
+      }
+  }
+  .unified_container .panel-default #api .localAccount .entry .buttons button:hover{
+      -moz-box-shadow:none;
+      -webkit-box-shadow:none;
+      box-shadow:none;
+      background-color:#64DEE7;
+      color:#051F20;
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item{
+      position:relative;
+      width:100%;
+      display:block
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item label{
+      display:none
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item input{
+      border: 1px solid rgba(255, 255, 255, .3);
+      border-radius: 4px;
+      background: transparent;
+      color: white;
+      display:inline-block;
+      width:100%!important;
+      height: 40px;
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item input:focus-visible {
+      outline: 1px solid #54c5ce;
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item input:focus{
+      border-style:none;
+      border-bottom:1px solid #54c5ce;
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item #password{
+      margin-bottom:20px;
+      margin-top: 5px;
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item .password-label{
+      text-align:left;
+      height:0;
+      left:0;
+      width:100%
+  }
+  @keyframes slideInFromLeft{
+      0%{
+          opacity:0;
+          transform:translateX(-30%)
+      }
+      100%{
+          opacity:1;
+          transform:translateX(0)
+      }
+  }
+  .create{
+      animation:.5s ease-out 0s 1 slideInFromLeft;
+      display: none;
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item .password-label #forgotPassword{
+      position:absolute;
+      right:0;
+      bottom:-5px;
+      clear:right;
+      cursor:pointer;
+      text-align:right;
+      transition: all ease-in-out 200ms;
+  }
+  .unified_container .panel-default #api .localAccount .entry .entry-item .password-label #forgotPassword:hover {
+      color: #64DEE7;
+  }
+  .unified_container .panel-default #api .localAccount .rememberMe{
+      position:relative;
+      margin-top:-2.25rem;
+      text-align:left;
+      width:16rem
+  }
+  .unified_container .panel-default #api .localAccount .rememberMe.align-to-left{
+      margin-top:1rem;
+      text-align:left
+  }
+  #api .working{
+      display:none
+  }
+  .unified_container .panel-default #api .localAccount .create p{
+      text-align:right;
+      margin-top:7rem;
+      margin-right:-1.5rem
+  }
+  .unified_container .panel-default #api .claims-provider-list-text-links p{
+      text-align:right;
+      margin-top:7rem
+  }
+  .unified_container .panel-default #api .localAccount .create #createAccount{
+      border-radius:4px;
+      display:inline-block;
+      font-size:1em;
+      font-weight:400;
+      height:inherit;
+      line-height:1.3333333;
+      padding:10px 16px;
+      text-align:center;
+      touch-action:manipulation;
+      user-select:none;
+      white-space:nowrap;
+      -moz-user-select:none;
+      -ms-touch-action:manipulation;
+      -ms-user-select:none;
+      -webkit-user-select:none;
+      width:auto;
+      margin-top:-3rem;
+      cursor:pointer
+  }
+  .unified_container .panel-default #api .social{
+      display:table-footer-group;
+      position:relative;
+      width:auto;
+      order: 1;
+      flex: 1;
+      background-color: #26292B;
+      border-radius: 4px;
+      padding: 24px;
+      border: 1px solid rgba(111, 111, 111, .2);
+  }
+  .unified_container .panel-default #api .social .options div {
+    margin-bottom: 8px;
+  }
+  .unified_container .panel-default #api .accountButton{
+      background-size:10% 70%;
+      background-position-x:3%;
+      background-position-y:50%;
+      background-repeat:no-repeat;
+      display:block;
+      font-size:1em;
+      height:40px;
+      width:100%;
+      margin-left:auto;
+      overflow:hidden;
+      padding:0 50px;
+      border: 1px solid rgba(0, 199, 212, .2);
+      margin-top:5px;
+      border-radius:4px;
+      letter-spacing:.04em;
+      text-transform: uppercase;
+      background-color: transparent;
+      color: #00C7D4;
+  }
+  .unified_container .panel-default #api .accountButton:hover{
+      -moz-box-shadow:none;
+      -webkit-box-shadow:none;
+      box-shadow:none;
+      background-color: rgba(0, 199, 212, .1);
+      transition: all ease-in-out 200ms;
+  }
+  .claims-provider-list-text-links-bottom-under-form{
+      text-align:right
+  }
+  @media (max-width:100%){
+    .unified_container .panel-default{
+        margin-top:auto;
+        margin-bottom:auto;
+        height:550px
+    }
+    .unified_container .panel-default .panel-body{
+        padding:15px 10px;
+        margin-top:20px
+    }
+    .unified_container .panel-default .panel-body .companyName{
+        display:none
+    }
+    .unified_container .panel-default .panel-body .companyLogo{
+        display:block;
+        width: 50%;
+        position: relative;
+        top: 50%;
+        left: 25%;
+    }
+    .unified_container .panel-default .panel-body h3{
+        display:block
+    }
+    .unified_container .panel-default .panel-body #api{
+        width:auto
+    }
+    .unified_container .panel-default .panel-body #api .social{
+        top:370px;
+        width:auto
+    }
+    .unified_container .panel-default .panel-body #api .social .options .accountButton{
+        height:40px
+    }
+    .unified_container .panel-default .panel-body #api .social .options #FacebookExchange{
+        background-size:12px;
+        background-position:50% 75%;
+        margin-bottom:10px
+    }
+    .unified_container .panel-default .panel-body #api .social .options #GoogleExchange{
+        background-size:20px;
+        background-position:50% 75%;
+        margin-bottom:10px
+    }
+    .unified_container .panel-default .panel-body #api .social .options #TwitterExchange{
+        background-size:20px;
+        background-position-x:56px;
+        background-position-y:14px;
+        margin-bottom:10px
+    }
+    .unified_container .panel-default .panel-body #api .localAccount{
+        top:20px
+    }
+    .unified_container .panel-default .panel-body #api .localAccount .entry .entry-item{
+        display:block;
+        width:100%;
+        margin-bottom:10px
+    }
+    .unified_container .panel-default .panel-body #api .localAccount .entry .entry-item .password-label{
+        top:145px
+    }
+    .unified_container .panel-default .panel-body #api .localAccount .entry .entry-item #logonIdentifier{
+        height:40px
+    }
+    .unified_container .panel-default .panel-body #api .localAccount .entry .entry-item #password{
+        height:40px
+    }
+    .unified_container .panel-default .panel-body #api .localAccount .entry .entry-item:nth-child(2){
+        width:auto;
+        float:left
+    }
+    .unified_container .panel-default .panel-body #api .localAccount .entry .buttons #next{
+        width:auto;
+        text-indent:-4px;
+        height:40px;
+        line-height:0;
+        position:relative;
+        bottom:5px;
+        left:8px
+    }
+  }
+  @media screen and (max-width:320px){
+  .unified_container .panel-default #api .localAccount .entry .entry-item .password-label #forgotPassword{
+      right:0;
+      bottom:0
+  }
+  .forgot-password.center-height{
+      right:0;
+      bottom:0
+  }
+  .unified_container .panel-default #api .localAccount .rememberMe{
+      width:50%
+  }
+  }
+
+</style>
+
+<!-- fix.css -->
+<style>
+    input::-ms-reveal,
+    input::-ms-clear {
+        display: none;
+    }
+
+    input[data-autocompleted] {
+        background-color: transparent !important;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+        transition: background-color 0s 0s, color 0s 0s;
+        transition-delay: calc(infinity * 1s);
+    }
+</style>
+
+<!-- footer-design.css -->
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+    }
+
+    body {
+        font-optical-sizing: auto;
+        padding: 0;
+        margin: 0;
+    }
+
+    .login {
+        background-color: #252525;
+        padding: 24px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        max-width: 450px;
+        width: 100%;
+        margin: auto;
+        top: 50%;
+    }
+    .f-size-18 {
+        font-size: 17px;
+    }
+    h2,
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    hr {
+        width: 100%;
+        opacity: .1;
+    }
+    .custom-select {
+      position: relative;
+      display: inline-block;
+      width: 180px;
+      margin: 16px;
+      align-self: end;
+    }
+    select {
+      appearance: none; /* remove estilo nativo */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, .3);
+      border-radius: 4px;
+      height: 42px;
+      padding-left: 12px;
+      padding-right: 28px; /* espaço pro ícone custom */
+      background-color: #121212; /* força fundo escuro */
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    select:hover {
+      background: rgba(255, 255, 255, .1);
+    }
+
+    select:focus {
+      border: 1px solid rgba(255, 255, 255, .7);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
+      outline: none;
+    }
+
+    /* Remove a seta nativa no IE/Edge */
+    select::-ms-expand {
+      display: none;
+    }
+
+    /* Add a custom dropdown arrow */
+    .custom-select::after {
+      content: "▼";
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      pointer-events: none;
+      font-size: 12px;
+      color: #ccc; /* mais visível no fundo escuro */
+    }
+
+    input {
+        border: 1px solid rgba(255, 255, 255, .3);
+        border-radius: 4px;
+        height: 28px;
+        padding-left: 8px;
+        padding-right: 8px;
+        background: transparent;
+        color: white;
+    }
+    input[type="button"] {
+        background: #52BCC4;
+    }
+    a {
+        color: #52BCC4;
+        transition: color ease-in-out 100ms;
+    }
+    a:hover {
+        color: #60D9E2;
+        text-decoration: none;
+    }
+    .d-flex {
+        display: flex;
+    }
+
+    .align-items-center {
+    align-items: center;
+    }
+
+    .flex-column {
+        flex-direction: column;
+    }
+
+    .flex-row {
+        flex-direction: row;
+    }
+
+    .gap-1 {
+        gap: .5em;
+    }
+
+    .gap-2 {
+        gap: 1em;
+    }
+    .f-grow-1{
+        flex-grow: 1;
+    }
+    .f-grow-2{
+        flex-grow: 2;
+    }
+    .mb-1 {
+        margin-bottom: .5em;
+    }
+
+    .mb-2 {
+        margin-bottom: 1em;
+    }
+    .mt-auto {
+    margin-top: auto;
+    }
+
+    .login .logo {
+        max-width: 200px;
+        width: 100%;
+        margin: auto;
+        margin-bottom: 2em;
+    }
+
+    .bold {
+        font-weight: 700;
+    }
+
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    footer {
+        background: rgba(255, 255, 255, .05);
+        color: white;
+        padding: 16px;
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        line-height: 125%;
+        flex-shrink: 0;
+        opacity: .8;
+    }
+    footer hr {
+      margin: 2px;
+    }
+    footer .opacity-3 {
+      opacity: .3;
+    }
+    footer .opacity-6 {
+      opacity: .6;
+    }
+    footer .title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      justify-content: center;
+      align-items: center;
+    }
+    footer .links ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+    footer .links ul li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    footer .links {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 24px;
+    }
+    .user-manual {
+        justify-self: center;
+    }
+    .flags {
+        justify-content: center;
+    }
+    footer .information {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 24px;
+    }
+    footer .information .left {
+        display: flex;
+        flex-direction: row;
+      justify-self: center;
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    footer .information .center {
+      justify-self: center;
+      grid-area: 2 / 1 / 3 / 2;
+    }
+    footer .information .right {
+      justify-self: center;
+      grid-area: 3 / 1 / 4 / 2;
+    }
+    footer .labeling, footer .version {
+      opacity: .6;
+    }
+    .forgot-password {
+        align-self: flex-end;
+    }
+    @media (min-width: 768px) {
+      footer .title {
+        align-items: start;
+      }
+    footer .links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 16px;
+    }
+    .user-manual {
+        justify-self: right;
+    }
+    .flags {
+        justify-content: left;
+    }
+      footer .information {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 16px;
+      }
+      footer .information .left {
+        justify-self: start;
+        grid-area: 1 / 1 / 2 / 3;
+      }
+      footer .information .center {
+        justify-self: start;
+        grid-area: 2 / 1 / 3 / 2;
+      }
+      footer .information .right {
+        justify-self: end;
+        grid-area: 2 / 2 / 3 / 3;
+      }
+    }
+    @media (min-width: 1200px) {
+        #page-container {
+            position: relative;
+            min-height: 100vh;
+        }
+        #content-wrap {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 130px;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 130px;
+        }
+        footer .links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr;
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+        }
+        .user-manual {
+            justify-self: center;
+        }
+        footer .information {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: 1fr;
+          grid-column-gap: 0px;
+          grid-row-gap: 0px;
+        }
+        footer .information .left {
+          grid-area: 1 / 1 / 2 / 2;
+          justify-self: start;
+        }
+        footer .information .center {
+          grid-area: 1 / 2 / 2 / 3;
+          justify-self: center;
+        }
+        footer .information .right {
+          grid-area: 1 / 3 / 2 / 4;
+          justify-self: end;
+        }
+    }
+
+    select, 
+    select option {
+        background-color: #121212 !important; 
+        color: white;                       
+        transition: none !important;
+    }
+    select:hover,
+    select:focus,
+    select option:hover,
+    select option:focus {
+        background-color: #121212 !important;
+        color: white !important;
+    }
+
+    .flag-container {
+        position: relative; 
+        width: 32px; 
+        height: 24px;
+    }
+
+    .info-box {
+        background-color: #E6E6E6; 
+        padding: 12px; 
+        color: #434849; 
+        border-radius: 4px; 
+        position: absolute; 
+        bottom: 32px; 
+        width: 360px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease;
+    }
+
+    .info-box .labels {
+        display: flex; 
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .flag-icon {
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, .1);
+        border-radius: 2px;
+        transition: filter 0.3s ease;
+    }
+    .flags:hover .flag-icon {
+    filter: grayscale(100%) brightness(70%);
+    }
+
+    .flags:hover .flag-container:hover .flag-icon {
+    filter: grayscale(0%) brightness(100%);
+    }
+
+    .flag-container:hover .info-box {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .flags {
+        display: flex; 
+        gap: 12px;
+        width: auto;
+    }
+
+    .locations hr {
+        background-color: #434849; 
+        height: 1px;
+        margin: 12px 0;
+    }
+
+    .manufacturer-container {
+        position: relative; 
+        width: 40px; 
+        height: 40px;
+        cursor: pointer;
+    }
+
+    .manufacturer-container:hover .info-box {
+        opacity: 1;
+        visibility: visible;
+        bottom: 44px; 
+    }
+    .manufacturer-icon {
+        opacity: .8;
+        transition: opacity 200ms ease-in-out;
+    }
+    .manufacturer-icon:hover {
+        opacity: 1;
+    }
+</style>
+
+</head>
+<body translate="no">
+    <div id="page-container">
+        <div id="content-wrap">
+            <div class="custom-select">
+              <select name="language" id="language">
+                  <option value="bg-BG">Български (bg-BG)</option>
+                  <option value="cs-CZ">Čeština (cs-CZ)</option>
+                  <option value="da">Dansk (da-DK)</option>
+                  <option value="de">Deutsch (de-DE)</option>
+                  <option value="el-GR">Ελληνικά (el-GR)</option>
+                  <option selected value="en-US">English (en-US)</option>
+                  <option value="es">Español (es-ES)</option>
+                  <option value="et-EE">Eesti (et-EE)</option>
+                  <option value="fi">Suomi (fi-FI)</option>
+                  <option value="fr">Français (fr-FR)</option>
+                  <option value="hr-HR">Hrvatski (hr-HR)</option>
+                  <option value="hu-HU">Magyar (hu-HU)</option>
+                  <option value="it">Italiano (it-IT)</option>
+                  <option value="lt-LT">Lietuvių (lt-LT)</option>
+                  <option value="lv-LV">Latviešu (lv-LV)</option>
+                  <option value="nl">Nederlands (nl-NL)</option>
+                  <option value="nb">Norsk (no-NO)</option>
+                  <option value="pt-BR">Português (pt-BR)</option>
+                  <option value="pt-PT">Português (pt-PT)</option>
+                  <option value="ro-RO">Română (ro-RO)</option>
+                  <option value="sk-SK">Slovenčina (sk-SK)</option>
+                  <option value="sl-SI">Slovenščina (sl-SI)</option>
+                  <option value="sv">Svenska (sv-SE)</option>
+              </select>
+            </div>
+
+            <div class="container unified_container content-wrap" role="presentation">
+                <div class="login panel panel-default">
+                    <div class="panel-body">
+                        <img class="companyLogo" data-tenant-branding-logo="true" src="https://ionicadb2c.blob.core.windows.net/adb2c/logo-lite.svg" alt="Company Logo">
+                        <div id="api" role="main">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+        
+          <div class="information">
+            <div class="left title">
+
+                <div class="manufacturer-container">
+                    <div class="info-box">
+                        <div class="labels">
+                            <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3082.svg" alt="">
+                        </div>
+                        <p class="mb-1"><strong>Ionic Health Technologies S.A</strong></p>
+                        <p>Estrada Doutor Altino Bondesan, nº 500, Sala 1.103 A</p>
+                        <p>Eugênio De Mello</p>
+                        <p>São José Dos Campos - SP</p>
+                        <p>12247-016</p>
+                        <p class="mb-1">Brasil</p>
+                        <p>+55 12 3600-0181</p>
+                        <p>contato@ionic.health</p>
+                    </div>
+                    <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3082_Light.svg" alt="" class="manufacturer-icon">
+                </div>
+
+                <div>
+                    <p>nCommand Lite / nCommand Lite System</p>
+                    <p class="opacity-6">by IONIC Health</p>
+                </div>
+            </div>
+            <div class="center d-flex flex-row gap-2 labeling" style="text-align: center;">
+              <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/ISO_7000_-_Ref-No_0434A_v3.svg" alt="">
+              <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/ISO_15223-1_-_Ref-No_5.7.7_v3.svg" alt="">
+              <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/ISO_7000_-_Ref-No_1641_v3.svg" alt="">
+              <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/CE_v3.svg" alt="">
+            </div>
+            <div class="right d-flex flex-row gap-2 version">
+                <div class="d-flex flex-row gap-1 align-items-center">
+                    <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/ISO_7000_-_Ref-No_2497_v3.svg" alt="">
+                    <p>12/2025</p>
+                </div>
+                <div class="d-flex flex-row gap-1 align-items-center">
+                    <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/ISO_7000_-_Ref-No_2498_v3.svg" alt="">
+                    <p id="pvs">Loading...</p>
+                </div>
+                <div class="d-flex flex-row gap-1 align-items-center">
+                    <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/ISO_15223-1_-_Ref-No_5.7.10_v3.svg" alt="">
+                    <p id="puid">Loading...</p>
+                </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="links">
+            <div class="locations">
+
+                <div class="flags">
+
+                    <div class="flag-container">
+                        <div class="info-box">
+                            <p><strong>Brasil</strong></p>
+                            <p>Remote operation of MRI devices</p>
+                            <hr>
+                            <div class="labels">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3082.svg" alt="">
+                                <div><img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_2493.svg" alt=""> nCommand Lite</div>
+                            </div>
+                            <p class="mb-1"><strong>Ionic Health Technologies S.A</strong></p>
+                            <p>Estrada Doutor Altino Bondesan, nº 500, Sala 1.103 A</p>
+                            <p>Eugênio De Mello</p>
+                            <p>São José Dos Campos - SP</p>
+                            <p>12247-016</p>
+                            <p class="mb-1">Brasil</p>
+                            <p>+55 12 3600-0181</p>
+                            <p>contato@ionic.health</p>
+                            <hr>
+                            <p class="mb-1"><strong>Responsável Técnico</strong></p>
+                            <p class="mb-2">
+                                Alexandre Seiji Fukuda Ribas​<br>
+                                CREA-SP: 5071085437
+                            </p>
+                            <p class="mb-1"><strong>ANVISA</strong></p>
+                            <p>
+                                82585300004
+                            </p>
+                        </div>
+                        <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/Brazil.svg" alt="" class="flag-icon">
+                    </div>
+
+                    <div class="flag-container">
+                        <div class="info-box">
+                            <p><strong>United States</strong></p>
+                            <p>Remote operation of MRI, CT and PET-CT devices</p>
+                            <hr>
+                            <div class="labels">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3725.svg" alt="">
+                                <div><img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_2493.svg" alt=""> nCommand Lite System</div>
+                            </div>
+                            <p class="mb-1"><strong>IONIC HEALTH USA INC.</strong></p>
+                            <p>11201 Cedar Avenue, STE 600, Cleveland, OH</p>
+                            <p>44106</p>
+                            <p class="mb-1">USA</p>
+                            <p>+1 (216) 242 1223​</p>
+                        </div>
+                        <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/UnitedStates.svg" alt="" class="flag-icon">
+                    </div>
+
+                    <div class="flag-container">
+                        <div class="info-box">
+                            <p><strong>European Economic Area (EEA)</strong></p>
+                            <p>Remote operation of MRI, CT and PET-CT devices</p>
+                            <hr>
+                            <div class="labels">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3725.svg" alt="">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_15223-1_-_Ref-No_5.1.2.svg" alt="">
+                                <div><img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_2493.svg" alt=""> nCommand Lite</div>
+                            </div>
+                            <p class="mb-1"><strong>EUROPE IONIC HEALTH DIGITAL TECHNOLOGIES, LDA</strong></p>
+                            <p>Rua de Raimundo Durães Magalhães, Lote 6/9</p>
+                            <p>4475-189 Maia</p>
+                            <p class="mb-1">Portugal</p>
+                            <p>+351 (300) 528 410​</p>
+                        </div>
+                        <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/Eea.svg" alt="" class="flag-icon">
+                    </div>
+
+                    <div class="flag-container">
+                        <div class="info-box">
+                            <p><strong>United Kingdom</strong></p>
+                            <p>Remote operation of MRI, CT and PET-CT devices</p>
+                            <hr>
+                            <div class="labels">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3725.svg" alt="">
+                                <div><img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_2493.svg" alt=""> nCommand Lite</div>
+                            </div>
+                            <p class="mb-1">
+                                <strong>
+                                    UK Responsible Person:<br>
+                                    Freyr Life Sciences LTD
+                                </strong>
+                            </p>
+                            <p>9 Greyfriars Road</p>
+                            <p>Reading, Berkshire</p>
+                            <p>RG1 1NU</p>
+                            <p>England, United Kingdom</p>
+                        </div>
+                        <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/UnitedKingdom.svg" alt="" class="flag-icon">
+                    </div>
+
+                    <div class="flag-container">
+                        <div class="info-box">
+                            <p><strong>Switzerland</strong></p>
+                            <p>Remote operation of MRI, CT and PET-CT devices</p>
+                            <hr>
+                            <div class="labels">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3725.svg" alt="">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/CH-REP.svg" alt="">
+                                <div><img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_2493.svg" alt=""> nCommand Lite System</div>
+                            </div>
+                            <p class="mb-1"><strong>Freyr Life Sciences GmbH</strong></p>
+                            <p>Bahnhofplatz<p>
+                            <p>CH-6300 Zug</p>
+                            <p>Switzerland</p>
+                        </div>
+                        <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/Switzerland.svg" alt="" class="flag-icon">
+                    </div>
+
+                    <div class="flag-container">
+                        <div class="info-box">
+                            <p><strong>Australia</strong></p>
+                            <p>Remote operation of MRI, CT and PET-CT devices</p>
+                            <hr>
+                            <div class="labels">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3725.svg" alt="">
+                                <div><img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_2493.svg" alt=""> nCommand Lite</div>
+                            </div>
+                            <p class="mb-1">
+                                <strong>
+                                    Australian Sponsor:<br>
+                                    Taevas Life Sciences Pty Ltd
+                                </strong>
+                            </p>
+                            <p>46 Dora St</p>
+                            <p>Blacktown NSW 2148</p>
+                            <p>Australia</p>
+                        </div>
+                        <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/Australia.svg" alt="" class="flag-icon">
+                    </div>
+
+                    <div class="flag-container">
+                        <div class="info-box">
+                            <p><strong>New Zealand</strong></p>
+                            <p>Remote operation of MRI, CT and PET-CT devices</p>
+                            <hr>
+                            <div class="labels">
+                                <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_3725.svg" alt="">
+                                <div><img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/ISO_7000_-_Ref-No_2493.svg" alt=""> nCommand Lite</div>
+                            </div>
+                            <p class="mb-1">
+                                <strong>
+                                    New Zealand Sponsor:<br>
+                                    Taevas Life Sciences Limited
+                                </strong>
+                            </p>
+                            <p>Level 3, 1 Margaret Street</p>
+                            <p>Lower Hutt 5010</p>
+                            <p>New Zealand</p>
+                        </div>
+                        <img src="https://ionicadb2c.blob.core.windows.net/adb2c/rotulo/v4/NewZealand.svg" alt="" class="flag-icon">
+                    </div>
+
+                </div>
+
+            </div>
+            <a href="https://www.ionic.health/nclite" target="_blank" id="ncommand-manual" class="user-manual"> User Manual </a>
+          </div>
+
+        </footer>
+    </div>
+    
+</body>
+</html>

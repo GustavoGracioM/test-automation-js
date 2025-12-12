@@ -1,0 +1,34 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  NODE_VERSION: '20.x'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '$(NODE_VERSION)'
+
+  - script: npm ci
+    displayName: 'Install dependencies'
+
+  - script: |
+      npm run test:report
+    displayName: 'Run Cucumber tests and generate reports'
+    env:
+      CI: true
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: 'reports/junit-report.xml'
+      testRunTitle: 'Cucumber Tests'
+      failTaskOnFailedTests: true
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'reports'
+      ArtifactName: 'reports'
+      publishLocation: 'Container'

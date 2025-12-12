@@ -1,0 +1,473 @@
+var applyB2CAddOns = function() {
+  onLoad();
+  setupPwdTogglers();
+};
+
+
+function updateQueryStringAndReload(paramName, paramValue) {
+  try {
+    const url = new URL(window.location.href);
+    const searchParams = url.searchParams;
+    searchParams.set(paramName, paramValue);
+
+    /*atualizando o state parameter*/
+    let state = searchParams.get('state');
+    const uiLocalesRegex = /ui_locales=([^&]*)/;
+    if (uiLocalesRegex.test(state)) {
+        if(paramValue === 'nb'){
+          paramValue = 'no';
+        }
+
+        state = state.replace(uiLocalesRegex, `ui_locales=${paramValue}`);
+        searchParams.set('state', state);
+    }
+    /*atualizando o state parameter*/
+
+    url.search = searchParams.toString();
+    window.location.href = url.toString(); 
+  } catch (error) {
+    
+  }
+}
+
+function setSelectValue(selectId, value) {
+  $(selectId).val(value);
+}
+
+function retry() {
+  setTimeout(function (){
+    const urlParams = new URLSearchParams(window.location.search);
+    const uiLocales = urlParams.get('ui_locales');
+    const version = urlParams.get('version');
+    const uid = urlParams.get('UID');
+  
+    try {
+      if (version) {
+        const pvsElement = document.getElementById("pvs");
+        if (pvsElement) {
+            pvsElement.textContent = " v" + version;
+            localStorage.setItem("Version", version);
+        }
+      }
+      if (uid) {
+        const puidElement = document.getElementById("puid");
+        if (puidElement) {
+          puidElement.textContent = " " + uid;
+            localStorage.setItem("UID", uid);
+        }
+      }
+    } catch (error){
+      setTimeout(function() {
+        if (version) {
+          const pvsElement = document.getElementById("pvs");
+          if (pvsElement) {
+              pvsElement.textContent = " v" + version;
+              localStorage.setItem("Version", version);
+          }
+        }
+        if (uid) {
+          const puidElement = document.getElementById("puid");
+          if (puidElement) {
+            puidElement.textContent = " " + uid;
+              localStorage.setItem("UID", uid);
+          }
+        }
+      }, 50);
+    }
+    
+
+    if (uiLocales) {
+      setSelectValue('#language', uiLocales);
+    }
+
+    try {
+      document.getElementById("email").tabIndex = 1;
+      document.getElementById("password").tabIndex = 2;
+      document.getElementById("next").tabIndex = 4;
+      document.getElementById("forgotPassword").tabIndex = 3;
+      document.getElementById('language').tabIndex = 5;
+    } catch (error){
+      setTimeout(function() {
+        document.getElementById("email").tabIndex = 1;
+        document.getElementById("password").tabIndex = 2;
+        document.getElementById("next").tabIndex = 4;
+        document.getElementById("forgotPassword").tabIndex = 3;
+        document.getElementById('language').tabIndex = 5;
+      }, 2000);
+    } 
+  }, 2000);
+}
+
+function onLoad() {
+  try {
+
+    checkIfLastActionWasCancelled();
+    checkIfUpdateUiLocales();
+    refreshPageAfterTabChange();
+    actionIntegrationLanguageCheck();
+
+    const languageSelect = document.getElementById('language');
+    languageSelect.addEventListener('change', function() {
+      const selectedValue = this.value;
+      updateQueryStringAndReload('ui_locales', selectedValue);
+    });
+  } catch (error) {
+    setTimeout(function() {
+      $('#language').change(function() {
+        const selectedValue = $(this).val(); 
+        updateQueryStringAndReload('ui_locales', selectedValue);
+      });
+    }, 50);
+  } finally {
+    const urlParams = new URLSearchParams(window.location.search);
+    const uiLocales = urlParams.get('ui_locales');
+    const version = urlParams.get('version');
+    const uid = urlParams.get('UID');
+    const msgHint = urlParams.get('msg_hint');
+
+    if(msgHint == "InvalidUser"){
+      document.querySelector('.error.pageLevel p').textContent = translate("accountInactiveWarning", uiLocales);
+    }
+
+    if(msgHint == "NewExternalUser"){
+      document.querySelector('.error.pageLevel p').textContent = translate("newUserWarning", uiLocales);
+      document.querySelector('.error.pageLevel p').style.color = "#008000";
+    }
+
+    if (uiLocales === 'no') {
+      updateQueryStringAndReload('ui_locales', 'nb');
+    }
+    try {
+      if (version) {
+        const pvsElement = document.getElementById("pvs");
+        if (pvsElement) {
+            pvsElement.textContent = " v" + version;
+            localStorage.setItem("Version", version);
+        }
+      }
+      if (uid) {
+        const puidElement = document.getElementById("puid");
+        if (puidElement) {
+          puidElement.textContent = " " + uid;
+            localStorage.setItem("UID", uid);
+        }
+      }
+      if (uiLocales){
+        localStorage.setItem("uiLocales", uiLocales);
+
+        const baseUrl = "https://www.ionic.health/nclite";
+        const nCommandManual = document.getElementById("ncommand-manual");
+
+        if (nCommandManual) {
+          const newSubtitle = translations.userManual[uiLocales] || translations.userManual["en-US"];
+          nCommandManual.textContent = newSubtitle;
+
+          const newISOCode = translations.ISOCodeRedirect[uiLocales] || translations.ISOCodeRedirect["en-US"];
+          nCommandManual.href = `${baseUrl}?lang=${encodeURIComponent(newISOCode)}&version=v${version}`;
+        }
+      }
+    } catch (error){
+      setTimeout(function() {
+        if (version) {
+          const pvsElement = document.getElementById("pvs");
+          if (pvsElement) {
+              pvsElement.textContent = " v" + version;
+              localStorage.setItem("Version", version);
+          }
+        }
+        if (uid) {
+          const puidElement = document.getElementById("puid");
+          if (puidElement) {
+            puidElement.textContent = " " + uid;
+              localStorage.setItem("UID", uid);
+          }
+        }
+      }, 50);
+    }
+    
+    if (uiLocales) {
+      if (uiLocales === 'no') {
+        setSelectValue('#language', 'nb');
+      }
+      else {
+        setSelectValue('#language', uiLocales);
+      }
+      
+    }
+
+    try {
+      document.getElementById("email").tabIndex = 1;
+      document.getElementById("password").tabIndex = 2;
+      document.getElementById("next").tabIndex = 4;
+      document.getElementById("forgotPassword").tabIndex = 3;
+      document.getElementById('language').tabIndex = 5;
+      document.getElementById('email').setAttribute('maxlength', '100');
+      document.getElementById('password').setAttribute('maxlength', '100');
+      document.getElementById("forgotPassword").style.zIndex = '10';
+
+      const localAccountForm = document.getElementById("localAccountForm");
+      removeValidationForm(localAccountForm);
+    } catch (error){
+      setTimeout(function() {
+        document.getElementById("email").tabIndex = 1;
+        document.getElementById("password").tabIndex = 2;
+        document.getElementById("next").tabIndex = 4;
+        document.getElementById("forgotPassword").tabIndex = 3;
+        document.getElementById('language').tabIndex = 5;
+        document.getElementById('email').setAttribute('maxlength', '100');
+        document.getElementById('password').setAttribute('maxlength', '100');
+        document.getElementById("forgotPassword").style.zIndex = '10';
+
+        const localAccountForm = document.getElementById("localAccountForm");
+        removeValidationForm(localAccountForm);
+      }, 50);
+    }
+  }
+}
+
+function makePwdToggler(pwd) {
+  pwd.style.paddingRight = '32px';
+  var toggleDiv = document.createElement('div');
+  toggleDiv.style.position = 'absolute';
+  toggleDiv.style.marginTop = '-40px';
+  toggleDiv.style.right = '8px';
+  toggleDiv.style.transform = 'translateY(-50%)';
+  toggleDiv.style.cursor = 'pointer';
+
+  var svg = document.createElement('img');
+  svg.setAttribute('src', 'https://ionicadb2c.blob.core.windows.net/adb2c/eye.svg');
+  svg.setAttribute('alt', 'Toggle Password Visibility');
+  svg.style.width = '24px';
+  svg.style.height = '24px';
+
+  toggleDiv.appendChild(svg);
+
+  pwd.parentNode.style.position = 'relative';
+  pwd.parentNode.appendChild(toggleDiv);
+
+  function toggle() {
+      if (pwd.type === 'password') {
+          pwd.type = 'text';
+          svg.setAttribute('src', 'https://ionicadb2c.blob.core.windows.net/adb2c/eye-off.svg');
+      } else {
+          pwd.type = 'password';
+          svg.setAttribute('src', 'https://ionicadb2c.blob.core.windows.net/adb2c/eye.svg');
+      }
+  }
+
+  toggleDiv.onclick = toggle;
+  toggleDiv.onkeydown = function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+          toggle();
+          event.preventDefault();
+      }
+  };
+}
+
+function setupPwdTogglers() {
+  var pwd = document.getElementById('password');
+  if (pwd) {
+    makePwdToggler(pwd);
+  }
+}
+
+function checkIfLastActionWasCancelled() {
+  const canceledValue = localStorage.getItem('canceled');
+  const uiLocales = localStorage.getItem('uiLocales');
+
+  if (canceledValue !== null && uiLocales !== null) {
+    localStorage.removeItem('canceled');
+
+    updateQueryStringAndReload('ui_locales', uiLocales);
+  }
+}
+
+function checkIfUpdateUiLocales() {
+  const uiLocalesValue = localStorage.getItem('ui_locales_update');
+	const uiLocales = localStorage.getItem('uiLocales');
+
+  if (uiLocalesValue !== null && uiLocales !== null) {
+    localStorage.removeItem('ui_locales_update');
+		updateQueryStringAndReload('ui_locales', uiLocales);
+  }
+}
+
+/**
+ * Refreshes the page when the user returns to the tab after switching away
+ * in order to avoid session/token issues after sign in/out from multiple tabs.
+ */
+function refreshPageAfterTabChange(){
+    document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "visible") {
+            location.reload();
+        }
+    });
+}
+
+function actionIntegrationLanguageCheck(){
+    const buttons = document.querySelectorAll('.claims-provider-selection');
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            localStorage.setItem('ui_locales_update', 'true');
+        });
+    });
+}
+
+(function onPageReady() {
+  var intervalHandle = setInterval(function() {
+      if (window.pageReady) {
+          applyB2CAddOns();
+          clearInterval(intervalHandle);
+      }
+  }, 50);
+}());
+
+function translate(key, locale) {
+  return translations[key]?.[locale] || translations[key]?.["en-US"] || "";
+}
+
+/**
+ * Removes validation from a form element
+ * @param {HTMLFormElement} form - The form element to remove validation from
+ * @returns {void}
+ * @throws {TypeError} If the input is not a form element
+ * @example
+ * const myForm = document.getElementById('myForm');
+ * removeValidationForm(myForm);
+ */
+function removeValidationForm(form) {
+  if (!(form instanceof HTMLFormElement)) throw new TypeError('Parameter must be a form element');
+  form.setAttribute('novalidate', 'novalidate');
+}
+
+const translations = {
+    "userManual": {
+        "bg-BG": "Ръководство за употреба",
+        "cs-CZ": "Uživatelská příručka",
+        "da": "Brugervejledning",
+        "de": "Benutzerhandbuch",
+        "el-GR": "Εγχειρίδιο χρήστη",
+        "en-US": "User Manual",
+        "es": "Manual de usuario",
+        "et-EE": "Kasutusjuhend",
+        "fi": "Käyttöohje",
+        "fr": "Manuel utilisateur",
+        "hr-HR": "Korisnički priručnik",
+        "hu-HU": "Felhasználói kézikönyv",
+        "it": "Manuale d'uso",
+        "lt-LT": "Naudotojo vadovas",
+        "lv-LV": "Lietotāja rokasgrāmata",
+        "nl" : "Gebruikershandleiding",
+        "nb": "Brukerveiledning",
+        "no": "Brukerveiledning",
+        "pt-BR": "Manual do Usuário",
+        "pt-PT": "Manual do Utilizador",
+        "ro-RO": "Manual de utilizare",
+        "sk-SK": "Používateľská príručka",
+        "sl-SI": "Uporabniški priročnik",
+        "sv": "Användarhandbok"
+    },
+    "accountInactiveWarning": {
+        "bg-BG": "Заявката не можа да бъде обработена. Моля, свържете се с поддръжката.",
+        "cs-CZ": "Požadavek nebylo možné zpracovat. Kontaktujte podporu.",
+        "da": "Det var ikke muligt at behandle anmodningen. Kontakt supporten.",
+        "de": "Die Anfrage konnte nicht verarbeitet werden. Bitte wenden Sie sich an den Support.",
+        "el-GR": "Δεν ήταν δυνατή η επεξεργασία του αιτήματος. Επικοινωνήστε με την υποστήριξη.",
+        "en-US": "Could not process request. Please contact support.",
+        "es": "No se pudo procesar la solicitud. Póngase en contacto con el soporte.",
+        "et-EE": "Päringut ei saanud töödelda. Võtke ühendust toega.",
+        "fi": "Pyyntöä ei voitu käsitellä. Ota yhteyttä tukeen.",
+        "fr": "Impossible de traiter la demande. Veuillez contacter le support.",
+        "hr-HR": "Zahtjev nije bilo moguće obraditi. Kontaktirajte podršku.",
+        "hu-HU": "A kérés feldolgozása nem sikerült. Kérjük, lépjen kapcsolatba a támogatással.",
+        "it": "Impossibile elaborare la richiesta. Contatta l'assistenza.",
+        "lt-LT": "Užklausos nepavyko apdoroti. Susisiekite su palaikymo tarnyba.",
+        "lv-LV": "Neizdevās apstrādāt pieprasījumu. Lūdzu, sazinieties ar atbalsta dienestu.",
+        "nl": "Kon de aanvraag niet verwerken. Neem contact op met de ondersteuning.",
+        "nb": "Kunne ikke behandle forespørselen. Kontakt kundestøtte.",
+        "no": "Kunne ikke behandle forespørselen. Kontakt kundestøtte.",
+        "pt-BR": "Não foi possível processar solicitação. Entre em contato com o suporte.",
+        "pt-PT": "Não foi possível processar o pedido. Contacte o suporte.",
+        "ro-RO": "Solicitarea nu a putut fi procesată. Contactați suportul tehnic.",
+        "sk-SK": "Požiadavku sa nepodarilo spracovať. Kontaktujte podporu.",
+        "sl-SI": "Zahteve ni bilo mogoče obdelati. Obrnite se na podporo.",
+        "sv": "Det gick inte att behandla begäran. Kontakta supporten."
+    },
+    "newUserWarning": {
+        "bg-BG": "Имейл адресът е потвърден. Вече можете да продължите.",
+        "cs-CZ": "E-mailová adresa se ověřila. Teď můžete pokračovat.",
+        "da": "Mailadressen er bekræftet. Du kan fortsætte nu.",
+        "de": "Die E-Mail-Adresse wurde verifiziert. Sie können jetzt fortfahren.",
+        "el-GR": "Η διεύθυνση ηλεκτρονικού ταχυδρομείου επαληθεύτηκε. Τώρα μπορείτε να συνεχίσετε.",
+        "en-US": "E-mail address verified. You can continue now.",
+        "es": "Dirección de correo electrónico verificada. Puede continuar.",
+        "et-EE": "E-posti aadress on kinnitatud. Saad nüüd jätkata.",
+        "fi": "Sähköpostiosoite on vahvistettu. Voit nyt jatkaa.",
+        "fr": "Nous avons vérifié l’adresse e-mail. Vous pouvez continuer maintenant.",
+        "hr-HR": "Adresa e-pošte je potvrđena. Možete nastaviti.",
+        "hu-HU": "Az e-mail-cím ellenőrzése megtörtént. Most már folytathatja.",
+        "it": "Indirizzo e-mail verificato. Ora è possibile continuare.",
+        "lt-LT": "El. pašto adresas patvirtintas. Dabar galite tęsti.",
+        "lv-LV": "E-pasta adrese apstiprināta. Tagad Jūs varat turpināt.",
+        "nl": "E-mailadres geverifieerd. U kunt nu doorgaan.",
+        "nb": "E-postadressen er bekreftet. Du kan nå fortsette.",
+        "no": "E-postadressen er bekreftet. Du kan nå fortsette.",
+        "pt-BR": "Endereço de email verificado. Você pode continuar agora.",
+        "pt-PT": "Endereço de e-mail verificado. Já pode continuar.",
+        "ro-RO": "Adresa de e-mail a fost verificată. Puteți continua acum.",
+        "sk-SK": "E-mailová adresa bola overená. Môžete pokračovať.",
+        "sl-SI": "E-poštni naslov je preverjen. Zdaj lahko nadaljujete.",
+        "sv": "E-postadressen har verifierats. Du kan fortsätta nu."
+    },
+    "countrySpecificRegulations": {
+        "bg-BG": "Информация на етикета на продукта",
+        "cs-CZ": "Informace o označení produktu",
+        "da": "Oplysninger om produktmærkning",
+        "de": "Informationen zur Produktkennzeichnung",
+        "el-GR": "Πληροφορίες επισήμανσης προϊόντος",
+        "en-US": "Product Labeling Information",
+        "es": "Información de etiquetado del producto",
+        "et-EE": "Toote märgistamise teave",
+        "fi": "Tuotteen merkintätiedot",
+        "fr": "Informations sur l’étiquetage du produit",
+        "hr-HR": "Podaci o označavanju proizvoda",
+        "hu-HU": "Termékcímke-információk",
+        "it": "Informazioni sull'etichettatura dei prodotti",
+        "lt-LT": "Produkto ženklinimo informacija",
+        "lv-LV": "Informācija par produktu marķēšanu",
+        "nb": "Informasjon om produktmerking",
+        "no": "Informasjon om produktmerking",
+        "pt-BR": "Informações de rotulagem do produto",
+        "pt-PT": "Informações de rotulagem do produto",
+        "ro-RO": "Informații privind etichetarea produsului",
+        "sk-SK": "Informácie o označení produktu",
+        "sl-SI": "Informacije o označevanju izdelkov",
+        "sv": "Produktmärkningsinformation"
+    },
+    "ISOCodeRedirect": {
+        "bg-BG": "bg-BG",
+        "cs-CZ": "cs-CZ",
+        "da": "da-DK",
+        "de": "de-DE",
+        "el-GR": "el-GR",
+        "en-US": "en-US",
+        "es": "es-ES",
+        "et-EE": "et-EE",
+        "fi": "fi-FI",
+        "fr": "fr-FR",
+        "hr-HR": "hr-HR",
+        "hu-HU": "hu-HU",
+        "it": "it-IT",
+        "lt-LT": "lt-LT",
+        "lv-LV": "lv-LV",
+        "nb": "no-NO",
+        "no": "no-NO",
+        "nl" : "nl-NL",
+        "pt-BR": "pt-BR",
+        "pt-PT": "pt-PT",
+        "ro-RO": "ro-RO",
+        "sk-SK": "sk-SK",
+        "sl-SI": "sl-SI",
+        "sv": "sv-SE"
+    }
+};
