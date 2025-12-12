@@ -23,4 +23,3 @@ const options = {
 };
 
 reporter.generate(options);
-console.log("HTML report generated at ./reports/cucumber-report.html");

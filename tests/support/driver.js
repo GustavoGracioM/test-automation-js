@@ -1,7 +1,6 @@
 require("chromedriver");
 const { Builder } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
-const path = require("path");
 
 let driver = null;
 
@@ -9,23 +8,21 @@ async function getDriver() {
   if (!driver) {
     const options = new chrome.Options();
 
-    // NÃO USAR user-data-dir ao testar câmera/microfone
-    // options.addArguments(`--user-data-dir=${path.resolve("chrome-profile")}`);
-
-    // Fake camera/mic (funciona no Windows)
+    // Permissões Feitas via Fake Devices
     options.addArguments("--use-fake-ui-for-media-stream");
     options.addArguments("--use-fake-device-for-media-stream");
     options.addArguments("--use-fake-video-capture=fake.y4m");
     options.addArguments("--use-fake-audio-capture=fake.wav");
 
-    // EVITA crash
+    // Evitar travas do Chrome
     options.addArguments("--no-sandbox");
     options.addArguments("--disable-dev-shm-usage");
     options.addArguments("--disable-gpu");
     options.addArguments("--disable-software-rasterizer");
-
-    // Tamanho da janela
     options.addArguments("--window-size=1920,1080");
+
+    options.addArguments("--start-maximized");
+    options.addArguments("--kiosk");
 
     driver = await new Builder()
       .forBrowser("chrome")

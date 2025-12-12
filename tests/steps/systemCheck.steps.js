@@ -4,9 +4,9 @@ const SystemCheckPage = require("../pages/SystemCheckPage");
 Given(
   "estou logado com usuário {string} e senha {string}",
   async function (email, senha) {
-   // await this.loginPage.open();
-    //await this.loginPage.fillEmailAndPassword(email, senha);
-    //await this.loginPage.clickNext();
+    await this.loginPage.open();
+    await this.loginPage.fillEmailAndPassword(email, senha);
+    await this.loginPage.clickNext();
     await this.loginPage.dropdrowMenuVerify();
   }
 );
